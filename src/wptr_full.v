@@ -23,7 +23,7 @@ module wptr_full #(parameter ASIZE = 4)(
 
   // Write address for memory access
   assign waddr     = wbin[ASIZE-1:0];
-  assign wbinnext  = wbin + (winc & ~wfull);
+  assign wbinnext  = wbin + {4'h0,(winc & ~wfull)};
   assign wgraynext = (wbinnext >> 1) ^ wbinnext;
 
   // Full condition (Cummings method)
