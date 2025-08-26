@@ -33,8 +33,8 @@ module tt_um_fifo #(parameter DSIZE=8, parameter ASIZE=4)
   // Clock divider instance
   clk_div clk_div_inst (
     .clk   (clk),
-    .r_rst (~rrst_n),   // active-high reset for divider
-    .w_rst (~wrst_n),
+    .r_rst (rrst_n),   // active-high reset for divider
+    .w_rst (wrst_n),
     .wclk  (wclk),
     .rclk  (rclk)
   );
