@@ -13,7 +13,7 @@ module tt_um_fifo #(parameter DSIZE=8, parameter ASIZE=4)
   assign uo_out = rdata;
   wire [DSIZE-1:0] rdata;
   wire  wfull, rempty;
-  assign uio_oe = 8'b00000011;
+  assign uio_oe = 8'b00100111;
   assign uio_out[0] = rempty;
   assign uio_out[1] = wfull;
   
@@ -22,7 +22,11 @@ module tt_um_fifo #(parameter DSIZE=8, parameter ASIZE=4)
   wire rinc = uio_in[6];
   wire rrst_n = uio_in[3];
   wire wrst_n = uio_in[4];
-  assign uio_out[7:2] = 0;
+    assign uio_out[7:6] = 0;
+    assign uio_out[4:3] = 0;
+    
+    assign uio_out[5] = wclk;
+    assign uio_out[2] = rclk;
   // Internal divided clocks
   wire wclk, rclk;
 
