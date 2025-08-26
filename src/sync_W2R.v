@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+
 module sync_W2R #(parameter ASIZE = 4)(
   output reg [ASIZE:0] WSR2_ptr,
   input  [ASIZE:0]     wptr,
