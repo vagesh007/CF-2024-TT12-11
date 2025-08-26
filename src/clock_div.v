@@ -9,15 +9,12 @@ module clk_div(
 );
 
     
-    always @(posedge clk or negedge rst) begin
-        if (!rst) begin
-            wclk <= 1'b0;
-            rclk <= 1'b0;
-        end
-    end
+    
     // Divide-by-2 for 50 MHz
-    always @(posedge clk or posedge w_rst) begin
-        if (w_rst)
+    always @(posedge clk or posedge w_rst or negedge rst) begin
+        if (!rst)
+            wclk <= 1'b0;
+        else if (w_rst)
             wclk <= 1'b0;
         else
             wclk <= ~wclk;
@@ -25,8 +22,10 @@ module clk_div(
 
     // Divide-by-3 for ~33.3 MHz
     reg [1:0] rcount;
-    always @(posedge clk or posedge r_rst) begin
-        if (r_rst) begin
+    always @(posedge clk or posedge r_rst or negedge rst) begin
+        if (!rst)
+            rclk <= 1'b0;
+        else if (r_rst) begin
             rcount <= 0;
             rclk   <= 1'b0;
         end else begin
