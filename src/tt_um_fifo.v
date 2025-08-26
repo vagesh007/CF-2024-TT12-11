@@ -1,14 +1,28 @@
-`timescale 1ns / 1ps
-module fifo #(parameter DSIZE=8, parameter ASIZE=4)
+module tt_um_fifo #(parameter DSIZE=8, parameter ASIZE=4)
 (
-  output [DSIZE-1:0] rdata,
-  output             wfull, rempty,
-  input  [DSIZE-1:0] wdata,
-  input              winc, rinc,
-  input              rrst_n, wrst_n,
-  input              clk        // board/system clock (100 MHz for example)
+    input  wire [7:0] ui_in,
+    output wire [7:0] uo_out,
+    input  wire [7:0] uio_in,
+    output wire [7:0] uio_out,
+    output wire [7:0] uio_oe,
+    input  wire   ena,
+    input  wire   clk,
+    input  wire   rst_n  
+  
 );
-
+  assign uo_out = rdata;
+  wire [DSIZE-1:0] rdata;
+  wire  wfull, rempty;
+  assign uio_oe = 8'b00000011;
+  assign uio_out[0] = rempty;
+  assign uio_out[1] = wfull;
+  
+  wire  [DSIZE-1:0] wdata = ui_in;
+  wire winc = uio_in[7];
+  wire rinc = uio_in[6];
+  wire rrst_n = uio_in[3];
+  wire wrst_n = uio_in[4];
+  assign uio_out[7:2] = 0;
   // Internal divided clocks
   wire wclk, rclk;
 
@@ -18,7 +32,8 @@ module fifo #(parameter DSIZE=8, parameter ASIZE=4)
     .r_rst (~rrst_n),   // active-high reset for divider
     .w_rst (~wrst_n),
     .wclk  (wclk),
-    .rclk  (rclk)
+    .rclk  (rclk),
+    .rst  (rst_n)
   );
 
   // Address & pointers
@@ -62,5 +77,5 @@ module fifo #(parameter DSIZE=8, parameter ASIZE=4)
     .RSW2_ptr(RSW2_ptr), .winc(winc),
     .wclk(wclk), .wrst_n(wrst_n)
   );
-
+  wire _unused = &{ena,uio_in[5],uio_in[2]};
 endmodule
