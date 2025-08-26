@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+
 module wptr_full #(parameter ASIZE = 4)(
   output reg [ASIZE:0] wptr,
   output     [ASIZE-1:0] waddr,
