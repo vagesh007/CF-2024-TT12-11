@@ -1,4 +1,3 @@
-`timescale 1ns/1ps
 module rptr_empty #(parameter ASIZE = 4)(
   output reg [ASIZE:0] rptr,
   output     [ASIZE-1:0] raddr,
