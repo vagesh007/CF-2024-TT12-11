@@ -1,18 +1,20 @@
-`timescale 1ns/1ps
+
 module clk_div(
     input  wire clk,     // 100 MHz input clock
     input  wire r_rst,   // active-high reset for rclk
     input  wire w_rst,   // active-high reset for wclk
     output reg  wclk,    // 50 MHz (÷2)
-    output reg  rclk     // ~33.3 MHz (÷3)
+    output reg  rclk,     // ~33.3 MHz (÷3)
+    input wire rst
 );
 
-    // Initial values for sim
-    initial begin
-        wclk = 1'b0;
-        rclk = 1'b0;
+    
+    always @(posedge clk or negedge rst) begin
+        if (!rst) begin
+            wclk <= 1'b0;
+            rclk <= 1'b0;
+        end
     end
-
     // Divide-by-2 for 50 MHz
     always @(posedge clk or posedge w_rst) begin
         if (w_rst)
