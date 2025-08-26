@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+
 module sync_R2W #(parameter ASIZE = 4)(
   output reg [ASIZE:0] RSW2_ptr,
   input  [ASIZE:0]     rptr,
