@@ -47,5 +47,5 @@ async def test_fifo(dut):
     assert read_val == test_val, f"FIFO mismatch! wrote {hex(test_val)}, got {hex(read_val)}"
 
     # ---- Test 3: Check empty flag ----
-    await ClockCycles(dut.clk, 10)
+    await ClockCycles(dut.clk, 100)
     #assert dut.uio_out[0].value == 1, "FIFO should be empty after reading"
