@@ -38,7 +38,7 @@ async def test_fifo(dut):
 
     # ---- Test 2: Read the value ----
     dut.uio_in[6].value = 1   # rinc = 1
-    await ClockCycles(dut.clk, 10)
+    await ClockCycles(dut.clk, 30)
     dut.uio_in[6].value = 0   # stop reading
     read_val = int(dut.uo_out.value)
     dut._log.info(f"Read {hex(read_val)} from FIFO")
@@ -48,4 +48,4 @@ async def test_fifo(dut):
 
     # ---- Test 3: Check empty flag ----
     await ClockCycles(dut.clk, 100)
-    # assert dut.uio_out[0].value == 1, "FIFO should be empty after reading"
+    assert dut.uio_out[0].value == 1, "FIFO should be empty after reading"
