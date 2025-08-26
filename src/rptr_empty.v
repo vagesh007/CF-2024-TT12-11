@@ -21,7 +21,7 @@ module rptr_empty #(parameter ASIZE = 4)(
 
 //memory 
   assign raddr     = rbin[ASIZE-1:0];
-  assign rbinnext  = rbin + (rinc & ~rempty);
+  assign rbinnext  = rbin + {4'h0,(rinc & ~rempty)};
   assign rgraynext = (rbinnext >> 1) ^ rbinnext;
 
 //empty cond
