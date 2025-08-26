@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+
 module fifomem  #(parameter DSIZE = 8,parameter ASIZE =4)
 (output reg [DSIZE-1:0] rdata,
  input [DSIZE-1:0] wdata,
