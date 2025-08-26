@@ -32,8 +32,7 @@ module tt_um_fifo #(parameter DSIZE=8, parameter ASIZE=4)
     .r_rst (~rrst_n),   // active-high reset for divider
     .w_rst (~wrst_n),
     .wclk  (wclk),
-    .rclk  (rclk),
-    .rst  (rst_n)
+    .rclk  (rclk)
   );
 
   // Address & pointers
@@ -77,5 +76,5 @@ module tt_um_fifo #(parameter DSIZE=8, parameter ASIZE=4)
     .RSW2_ptr(RSW2_ptr), .winc(winc),
     .wclk(wclk), .wrst_n(wrst_n)
   );
-    wire _unused = &{ena,uio_in[5],uio_in[2:0]};
+    wire _unused = &{ena,uio_in[5],uio_in[2:0],rst_n};
 endmodule
