@@ -8,7 +8,6 @@ module fifomem  #(parameter DSIZE = 8,parameter ASIZE =4)
  
  localparam DEPTH = 1<<ASIZE;
  reg [DSIZE-1:0] mem [0:DEPTH-1];
- reg [DSIZE-1:0] rdata_reg;
  
  always@(posedge wclk)
  if(wclken)
