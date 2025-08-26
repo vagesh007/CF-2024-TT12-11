@@ -7,6 +7,7 @@ module wptr_full #(parameter ASIZE = 4)(
   input  wclk,
   input  wrst_n,
   input  winc
+  
 );
 
   reg  [ASIZE:0] wbin;
