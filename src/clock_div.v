@@ -4,8 +4,7 @@ module clk_div(
     input  wire r_rst,   // active-high reset for rclk
     input  wire w_rst,   // active-high reset for wclk
     output reg  wclk,    // 50 MHz (÷2)
-    output reg  rclk,     // ~33.3 MHz (÷3)
-    input wire rst
+    output reg  rclk     // ~33.3 MHz (÷3)
 );
 
     
